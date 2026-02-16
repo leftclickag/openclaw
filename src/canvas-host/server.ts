@@ -71,7 +71,7 @@ function defaultIndexHTML() {
   button { appearance: none; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.10); color: #fff; padding: 10px 12px; border-radius: 12px; font-weight: 600; cursor: pointer; }
   button:active { transform: translateY(1px); }
   .ok { color: #24e08a; }
-  .bad { color: #ff5c5c; }
+  .bad { color: #ef4444; }
   .log { margin-top: 14px; opacity: 0.85; font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 12px; }
 </style>
 <div class="wrap">

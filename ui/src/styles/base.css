@@ -1,190 +1,189 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  /* Background - Warmer dark with depth */
-  --bg: #12141a;
-  --bg-accent: #14161d;
-  --bg-elevated: #1a1d25;
-  --bg-hover: #262a35;
-  --bg-muted: #262a35;
+  /* Background - Clean dark with neutral undertone */
+  --bg: #0f1117;
+  --bg-accent: #13151d;
+  --bg-elevated: #1a1c26;
+  --bg-hover: #22252f;
+  --bg-muted: #22252f;
 
-  /* Card / Surface - More contrast between levels */
-  --card: #181b22;
+  /* Card / Surface - Refined elevation hierarchy */
+  --card: #161821;
   --card-foreground: #f4f4f5;
-  --card-highlight: rgba(255, 255, 255, 0.05);
-  --popover: #181b22;
+  --card-highlight: rgba(255, 255, 255, 0.04);
+  --popover: #161821;
   --popover-foreground: #f4f4f5;
 
   /* Panel */
-  --panel: #12141a;
-  --panel-strong: #1a1d25;
-  --panel-hover: #262a35;
-  --chrome: rgba(18, 20, 26, 0.95);
-  --chrome-strong: rgba(18, 20, 26, 0.98);
+  --panel: #0f1117;
+  --panel-strong: #1a1c26;
+  --panel-hover: #22252f;
+  --chrome: rgba(15, 17, 23, 0.95);
+  --chrome-strong: rgba(15, 17, 23, 0.98);
 
-  /* Text - Slightly warmer */
-  --text: #e4e4e7;
-  --text-strong: #fafafa;
-  --chat-text: #e4e4e7;
-  --muted: #71717a;
-  --muted-strong: #52525b;
-  --muted-foreground: #71717a;
+  /* Text - Neutral and readable */
+  --text: #e2e4e9;
+  --text-strong: #f8f9fa;
+  --chat-text: #e2e4e9;
+  --muted: #6b7280;
+  --muted-strong: #4b5563;
+  --muted-foreground: #6b7280;
 
-  /* Border - Subtle but defined */
-  --border: #27272a;
-  --border-strong: #3f3f46;
-  --border-hover: #52525b;
-  --input: #27272a;
-  --ring: #ff5c5c;
+  /* Border - Refined and subtle */
+  --border: #1f2937;
+  --border-strong: #374151;
+  --border-hover: #4b5563;
+  --input: #1f2937;
+  --ring: #6366f1;
 
-  /* Accent - Punchy signature red */
-  --accent: #ff5c5c;
-  --accent-hover: #ff7070;
-  --accent-muted: #ff5c5c;
-  --accent-subtle: rgba(255, 92, 92, 0.15);
-  --accent-foreground: #fafafa;
-  --accent-glow: rgba(255, 92, 92, 0.25);
-  --primary: #ff5c5c;
+  /* Accent - Professional indigo */
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-muted: #6366f1;
+  --accent-subtle: rgba(99, 102, 241, 0.15);
+  --accent-foreground: #ffffff;
+  --accent-glow: rgba(99, 102, 241, 0.2);
+  --primary: #6366f1;
   --primary-foreground: #ffffff;
 
-  /* Secondary - Teal accent for variety */
+  /* Secondary - Slate for structure */
   --secondary: #1e2028;
   --secondary-foreground: #f4f4f5;
-  --accent-2: #14b8a6;
-  --accent-2-muted: rgba(20, 184, 166, 0.7);
-  --accent-2-subtle: rgba(20, 184, 166, 0.15);
+  --accent-2: #06b6d4;
+  --accent-2-muted: rgba(6, 182, 212, 0.7);
+  --accent-2-subtle: rgba(6, 182, 212, 0.12);
 
-  /* Semantic - More saturated */
-  --ok: #22c55e;
-  --ok-muted: rgba(34, 197, 94, 0.75);
-  --ok-subtle: rgba(34, 197, 94, 0.12);
+  /* Semantic - Clear and purposeful */
+  --ok: #10b981;
+  --ok-muted: rgba(16, 185, 129, 0.75);
+  --ok-subtle: rgba(16, 185, 129, 0.12);
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
   --warn: #f59e0b;
   --warn-muted: rgba(245, 158, 11, 0.75);
-  --warn-subtle: rgba(245, 158, 11, 0.12);
+  --warn-subtle: rgba(245, 158, 11, 0.1);
   --danger: #ef4444;
   --danger-muted: rgba(239, 68, 68, 0.75);
-  --danger-subtle: rgba(239, 68, 68, 0.12);
+  --danger-subtle: rgba(239, 68, 68, 0.1);
   --info: #3b82f6;
 
-  /* Focus - With glow */
-  --focus: rgba(255, 92, 92, 0.25);
+  /* Focus - Precise and professional */
+  --focus: rgba(99, 102, 241, 0.2);
   --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
-  --focus-glow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring), 0 0 20px var(--accent-glow);
+  --focus-glow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring), 0 0 12px var(--accent-glow);
 
   /* Grid */
-  --grid-line: rgba(255, 255, 255, 0.04);
+  --grid-line: rgba(255, 255, 255, 0.03);
 
   /* Theme transition */
   --theme-switch-x: 50%;
   --theme-switch-y: 50%;
 
-  /* Typography - Space Grotesk for personality */
+  /* Typography - Inter for professional readability */
   --mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
-  --font-body: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display:
-    "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Shadows - Richer with subtle color */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.03);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03);
-  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.03);
-  --shadow-glow: 0 0 30px var(--accent-glow);
+  /* Shadows - Clean and functional */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-glow: 0 0 20px var(--accent-glow);
 
-  /* Radii - Slightly larger for friendlier feel */
+  /* Radii - Consistent and refined */
   --radius-sm: 6px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
   --radius-full: 9999px;
   --radius: 8px;
 
-  /* Transitions - Snappy but smooth */
+  /* Transitions - Snappy and professional */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-fast: 120ms;
-  --duration-normal: 200ms;
-  --duration-slow: 350ms;
+  --duration-normal: 180ms;
+  --duration-slow: 300ms;
 
   color-scheme: dark;
 }
 
-/* Light theme - Clean with subtle warmth */
+/* Light theme - Clean and professional */
 :root[data-theme="light"] {
-  --bg: #fafafa;
-  --bg-accent: #f5f5f5;
+  --bg: #f9fafb;
+  --bg-accent: #f3f4f6;
   --bg-elevated: #ffffff;
-  --bg-hover: #f0f0f0;
-  --bg-muted: #f0f0f0;
-  --bg-content: #f5f5f5;
+  --bg-hover: #f3f4f6;
+  --bg-muted: #f3f4f6;
+  --bg-content: #f3f4f6;
 
   --card: #ffffff;
-  --card-foreground: #18181b;
-  --card-highlight: rgba(0, 0, 0, 0.03);
+  --card-foreground: #111827;
+  --card-highlight: rgba(0, 0, 0, 0.02);
   --popover: #ffffff;
-  --popover-foreground: #18181b;
+  --popover-foreground: #111827;
 
-  --panel: #fafafa;
-  --panel-strong: #f5f5f5;
-  --panel-hover: #ebebeb;
-  --chrome: rgba(250, 250, 250, 0.95);
-  --chrome-strong: rgba(250, 250, 250, 0.98);
+  --panel: #f9fafb;
+  --panel-strong: #f3f4f6;
+  --panel-hover: #e5e7eb;
+  --chrome: rgba(249, 250, 251, 0.95);
+  --chrome-strong: rgba(249, 250, 251, 0.98);
 
-  --text: #3f3f46;
-  --text-strong: #18181b;
-  --chat-text: #3f3f46;
-  --muted: #71717a;
-  --muted-strong: #52525b;
-  --muted-foreground: #71717a;
+  --text: #374151;
+  --text-strong: #111827;
+  --chat-text: #374151;
+  --muted: #6b7280;
+  --muted-strong: #4b5563;
+  --muted-foreground: #6b7280;
 
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --border-hover: #a1a1aa;
-  --input: #e4e4e7;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --border-hover: #9ca3af;
+  --input: #e5e7eb;
 
-  --accent: #dc2626;
-  --accent-hover: #ef4444;
-  --accent-muted: #dc2626;
-  --accent-subtle: rgba(220, 38, 38, 0.12);
+  --accent: #4f46e5;
+  --accent-hover: #6366f1;
+  --accent-muted: #4f46e5;
+  --accent-subtle: rgba(79, 70, 229, 0.1);
   --accent-foreground: #ffffff;
-  --accent-glow: rgba(220, 38, 38, 0.15);
-  --primary: #dc2626;
+  --accent-glow: rgba(79, 70, 229, 0.1);
+  --primary: #4f46e5;
   --primary-foreground: #ffffff;
 
-  --secondary: #f4f4f5;
-  --secondary-foreground: #3f3f46;
-  --accent-2: #0d9488;
-  --accent-2-muted: rgba(13, 148, 136, 0.75);
-  --accent-2-subtle: rgba(13, 148, 136, 0.12);
+  --secondary: #f3f4f6;
+  --secondary-foreground: #374151;
+  --accent-2: #0891b2;
+  --accent-2-muted: rgba(8, 145, 178, 0.75);
+  --accent-2-subtle: rgba(8, 145, 178, 0.1);
 
-  --ok: #16a34a;
-  --ok-muted: rgba(22, 163, 74, 0.75);
-  --ok-subtle: rgba(22, 163, 74, 0.1);
+  --ok: #059669;
+  --ok-muted: rgba(5, 150, 105, 0.75);
+  --ok-subtle: rgba(5, 150, 105, 0.08);
   --destructive: #dc2626;
   --destructive-foreground: #fafafa;
   --warn: #d97706;
   --warn-muted: rgba(217, 119, 6, 0.75);
-  --warn-subtle: rgba(217, 119, 6, 0.1);
+  --warn-subtle: rgba(217, 119, 6, 0.08);
   --danger: #dc2626;
   --danger-muted: rgba(220, 38, 38, 0.75);
-  --danger-subtle: rgba(220, 38, 38, 0.1);
+  --danger-subtle: rgba(220, 38, 38, 0.08);
   --info: #2563eb;
 
-  --focus: rgba(220, 38, 38, 0.2);
-  --focus-glow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring), 0 0 16px var(--accent-glow);
+  --focus: rgba(79, 70, 229, 0.15);
+  --focus-glow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring), 0 0 12px var(--accent-glow);
 
-  --grid-line: rgba(0, 0, 0, 0.05);
+  --grid-line: rgba(0, 0, 0, 0.04);
 
-  /* Light shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 24px var(--accent-glow);
+  /* Light shadows - subtle elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-glow: 0 0 16px var(--accent-glow);
 
   color-scheme: light;
 }
@@ -200,8 +199,8 @@ body {
 
 body {
   margin: 0;
-  font: 400 14px/1.55 var(--font-body);
-  letter-spacing: -0.02em;
+  font: 400 14px/1.6 var(--font-body);
+  letter-spacing: -0.011em;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -354,10 +353,10 @@ select {
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(255, 92, 92, 0);
+    box-shadow: 0 0 0 rgba(99, 102, 241, 0);
   }
   50% {
-    box-shadow: 0 0 20px var(--accent-glow);
+    box-shadow: 0 0 16px var(--accent-glow);
   }
 }
 

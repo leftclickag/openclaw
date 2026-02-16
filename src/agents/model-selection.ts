@@ -45,6 +45,9 @@ export function normalizeProviderId(provider: string): string {
   if (normalized === "kimi-code") {
     return "kimi-coding";
   }
+  if (normalized === "azure_openai" || normalized === "azureopenai") {
+    return "azure-openai";
+  }
   return normalized;
 }
 

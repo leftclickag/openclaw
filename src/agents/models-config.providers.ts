@@ -150,6 +150,17 @@ const NVIDIA_DEFAULT_COST = {
   cacheWrite: 0,
 };
 
+// Azure OpenAI v1 API (Aug 2025+): uses /openai/v1/ path, no api-version query param needed.
+// Auth via api-key header. Deployment name = model ID in request body.
+const AZURE_OPENAI_DEFAULT_CONTEXT_WINDOW = 128000;
+const AZURE_OPENAI_DEFAULT_MAX_TOKENS = 16384;
+const AZURE_OPENAI_DEFAULT_COST = {
+  input: 0,
+  output: 0,
+  cacheRead: 0,
+  cacheWrite: 0,
+};
+
 interface OllamaModel {
   name: string;
   modified_at: string;
@@ -411,6 +422,115 @@ export function normalizeProviders(params: {
   return mutated ? next : providers;
 }
 
+/** Only allow safe characters in deployment names (alphanumeric, hyphens, dots, underscores). */
+function sanitizeDeploymentName(raw: string): string | undefined {
+  const trimmed = raw.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+  if (!/^[\w.\-]+$/.test(trimmed)) {
+    return undefined;
+  }
+  return trimmed;
+}
+
+/** Validate that the endpoint looks like a plausible HTTPS Azure URL. */
+function isValidAzureEndpoint(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") {
+      return false;
+    }
+    // Block obvious SSRF targets (metadata endpoints, loopback, private ranges).
+    const host = parsed.hostname.toLowerCase();
+    if (
+      host === "localhost" ||
+      host === "169.254.169.254" ||
+      host.startsWith("127.") ||
+      host.startsWith("10.") ||
+      host.startsWith("192.168.") ||
+      host === "[::1]"
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Resolve Azure OpenAI environment variables.
+ * Returns null when the required vars (endpoint + key) are missing or invalid.
+ */
+export function resolveAzureOpenAIEnv(env: NodeJS.ProcessEnv = process.env): {
+  endpoint: string;
+  deployment: string | undefined;
+  apiVersion: string | undefined;
+} | null {
+  const endpoint = env.AZURE_OPENAI_ENDPOINT?.trim()?.replace(/\/+$/, "");
+  const apiKey = env.AZURE_OPENAI_API_KEY?.trim();
+  if (!endpoint || !apiKey) {
+    return null;
+  }
+  if (!isValidAzureEndpoint(endpoint)) {
+    return null;
+  }
+  return {
+    endpoint,
+    deployment: sanitizeDeploymentName(env.AZURE_OPENAI_DEPLOYMENT ?? ""),
+    apiVersion: env.AZURE_OPENAI_API_VERSION?.trim() || undefined,
+  };
+}
+
+/**
+ * Build Azure OpenAI provider config.
+ *
+ * Uses the v1 API (`/openai/v1/`) introduced Aug 2025 which does not
+ * require `api-version` as a query parameter and accepts standard
+ * `Authorization: Bearer` auth. The deployment name is passed via the
+ * `model` field in the request body.
+ *
+ * If `AZURE_OPENAI_API_VERSION` is set alongside a deployment, falls
+ * back to the legacy per-deployment endpoint
+ * (`/openai/deployments/{deployment}`).
+ *
+ * Security: the API key is stored only in `apiKey` (env var name) so
+ * it benefits from the existing redaction pipeline. No secrets are
+ * placed in the `headers` field.
+ */
+export function buildAzureOpenAIProvider(params: {
+  endpoint: string;
+  deployment?: string;
+  apiVersion?: string;
+}): ProviderConfig {
+  const { endpoint, deployment, apiVersion } = params;
+
+  // Legacy per-deployment URL when api-version is explicitly provided.
+  const baseUrl = apiVersion && deployment
+    ? `${endpoint}/openai/deployments/${deployment}`
+    : `${endpoint}/openai/v1`;
+
+  const modelId = deployment ?? "gpt-4o";
+  const models: ProviderModelConfig[] = [
+    {
+      id: modelId,
+      name: `Azure OpenAI ${modelId}`,
+      reasoning: false,
+      input: ["text", "image"],
+      cost: AZURE_OPENAI_DEFAULT_COST,
+      contextWindow: AZURE_OPENAI_DEFAULT_CONTEXT_WINDOW,
+      maxTokens: AZURE_OPENAI_DEFAULT_MAX_TOKENS,
+    },
+  ];
+
+  return {
+    baseUrl,
+    api: "openai-completions",
+    models,
+  };
+}
+
 function buildMinimaxProvider(): ProviderConfig {
   return {
     baseUrl: MINIMAX_PORTAL_BASE_URL,
@@ -664,6 +784,19 @@ export async function resolveImplicitProviders(params: {
   const authStore = ensureAuthProfileStore(params.agentDir, {
     allowKeychainPrompt: false,
   });
+
+  // Azure OpenAI: auto-detect from AZURE_OPENAI_* env vars.
+  // Only the env var name is stored; the actual secret is resolved at runtime.
+  const azureApiKeyVar = resolveEnvApiKeyVarName("azure-openai");
+  if (azureApiKeyVar) {
+    const azureEnv = resolveAzureOpenAIEnv();
+    if (azureEnv) {
+      providers["azure-openai"] = {
+        ...buildAzureOpenAIProvider(azureEnv),
+        apiKey: azureApiKeyVar,
+      };
+    }
+  }
 
   const minimaxKey =
     resolveEnvApiKeyVarName("minimax") ??
